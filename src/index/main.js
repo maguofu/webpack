@@ -1,9 +1,9 @@
 import _ from 'lodash';
-import './style.less';
-import './index.css';
-import timu from './timu.png';
-import data from './data.xml';
-import { printMe } from './print.js';
+import './css/style.less';
+import './css/index.css';
+import timu from './resource/timu.png';
+import data from './resource/data.xml';
+import { printMe } from '../common/print';
 
 if (process.env.NODE_ENV === 'production') {
   console.log('Looks like we are in production mode!');
@@ -30,7 +30,7 @@ function component() {
 document.body.appendChild(component());
 
 if (module.hot) {
-  module.hot.accept('./print.js', () => {
+  module.hot.accept('../common/print.js', () => {
     console.log('Accepting the updated printMe module!');
     printMe();
   })
