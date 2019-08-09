@@ -60,16 +60,26 @@ module.exports = {
     new CleanWebpackPlugin(),
     new VueLoaderPlugin(),
   ].concat(getHtmls()),
+  resolve: {
+    extensions: [ '.tsx', '.ts', '.js' ]
+  },
   module: {
     rules: [
       {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
+      },
+      {
         test: /\.vue$/,
+        exclude: /node_modules/,
         use: [
           'vue-loader'
         ]
       },
       {
         test: /\.(css|less|sass)$/,
+        exclude: /node_modules/,
         use: [
           'vue-style-loader',
           'style-loader',

@@ -6,7 +6,7 @@ module.exports = {
       name: 'index',
     },
     {
-      entry: './src/demo/main.js',
+      entry: './src/demo/main.ts',
       name: 'demo',
     },
     {
