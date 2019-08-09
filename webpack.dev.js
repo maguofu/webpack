@@ -14,7 +14,7 @@ module.exports = merge(common, {
   // 使用观察模式  webpack --watch  build完成后需要手动刷新
   // S使用 webpack-dev-server  开发模式（常用方式）  webpack-dev-server --open
   devServer: {
-    contentBase: './dist',
+    contentBase: './src',
     hot: true,
   },
   // E使用 webpack-dev-server  开发模式（常用方式）  webpack-dev-server --open
