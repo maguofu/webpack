@@ -66,6 +66,15 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(js|ts)$/,
+        use: [{
+          loader: 'babel-loader',
+          options: {
+             presets: ['es2015']
+          }
+        }]
+      },
+      {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/
