@@ -20,10 +20,13 @@
 
 
 import Vue from 'vue';
-import router from './router/index';
+import router from './router/index.ts';
 import App from './demo.vue';
-// Vue.config.productionTip = false;
-// Vue.config.devtools = process.env.NODE_ENV !== 'production';
+
+// @ts-ignore
+Vue.config.productionTip = false;
+// @ts-ignore
+Vue.config.devtools = process.env.NODE_ENV !== 'production';
 new Vue({
   router,
   render: (h: any):any => h(App)

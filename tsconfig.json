@@ -8,6 +8,9 @@
     "allowJs": true,
     "sourceMap": true
   },
+  "types": [
+    "webpack-env"
+  ],
   "exclude": [
     "node_modules"
   ],

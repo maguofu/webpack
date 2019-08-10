@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const miniCssExtractPlugin = require('mini-css-extract-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const pages = require('./page');
 // S获取入口map
@@ -54,10 +53,8 @@ module.exports = {
   plugins: [
     // 分离css
     new miniCssExtractPlugin({
-        filename: '[name].[hash:8].css',
+      filename: '[name].[hash:8].css',
     }),
-    // 删除build之后的文件夹内容
-    new CleanWebpackPlugin(),
     new VueLoaderPlugin(),
   ].concat(getHtmls()),
   resolve: {
@@ -75,16 +72,16 @@ module.exports = {
         }]
       },
       {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/
-      },
-      {
         test: /\.vue$/,
         exclude: /node_modules/,
         use: [
           'vue-loader'
         ]
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
       },
       {
         test: /\.(css|less|sass)$/,
