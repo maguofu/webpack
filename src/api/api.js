@@ -1,5 +1,6 @@
-import axios from 'axios';
-import $http from '@utils/api';
+
+
+import $http from '../../utils/api';
 const apiInfo = {
   testApi: {
     url: `/test/user/homework`,

@@ -5,7 +5,7 @@
   </div>
 </template>
 <script>
-import api from '@src/api/api.js';
+import api from '../../api/api.js';
 export default {
   data() {
     return {
