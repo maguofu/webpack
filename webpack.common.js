@@ -39,6 +39,12 @@ module.exports = {
     filename: 'static/js/[name].[hash:8].js',
     path: path.resolve(__dirname, 'dist'),
   },
+  resolve:{
+    alias: {
+      '@src': path.resolve(__dirname, 'src/'),
+      '@utils': path.resolve(__dirname, 'utils/'),
+    }
+  },
   // 防止重复，提出公共模块
   // optimization: {
   //   splitChunks: {

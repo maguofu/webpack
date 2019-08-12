@@ -5,11 +5,17 @@
   </div>
 </template>
 <script>
+import api from '@src/api/api.js';
 export default {
   data() {
     return {
       
     }
+  },
+  created() {
+    api.testApi({a: 'aaa'}).then(res => {
+      
+    })
   },
   methods: {
     gotoResult() {
