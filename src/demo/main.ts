@@ -22,7 +22,6 @@
 import Vue from 'vue';
 import router from './router/index.ts';
 import App from './demo.vue';
-
 // @ts-ignore
 Vue.config.productionTip = false;
 // @ts-ignore
@@ -31,4 +30,3 @@ new Vue({
   router,
   render: (h: any):any => h(App)
 }).$mount("#app")
-

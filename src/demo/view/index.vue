@@ -1,10 +1,19 @@
 <template>
   <div class="index-component">
     ttttiiiii
-    <div class="goto-result-btn">跳转到result页面</div>
+    <div class="goto-result-btn" @click="gotoResult">跳转到result页面</div>
   </div>
 </template>
+<script lang="ts">
+  import { Vue, Component } from "vue-property-decorator";
+  export default class Demo extends Vue {
 
+    gotoResult() {
+      // this.$router.push({name: 'result', params: {}});
+      console.log('asdfsdfg');
+    }
+  }
+</script>
 <style lang="less" scoped>
   .goto-result-btn{
     font-size: .2rem;

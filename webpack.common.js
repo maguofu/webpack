@@ -42,7 +42,8 @@ module.exports = {
     alias: {
       '@src': path.resolve(__dirname, 'src/'),
       '@utils': path.resolve(__dirname, 'utils/'),
-    }
+    },
+    extensions: ['.vue', '.tsx', '.ts', '.js']
   },
   // 防止重复，提出公共模块
   // optimization: {
@@ -63,9 +64,6 @@ module.exports = {
     }),
     new VueLoaderPlugin(),
   ].concat(getHtmls()),
-  resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ]
-  },
   module: {
     rules: [
       {
@@ -81,13 +79,18 @@ module.exports = {
         test: /\.vue$/,
         exclude: /node_modules/,
         use: [
-          'vue-loader'
+          'vue-loader',
         ]
       },
       {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/
+        test: /\.(ts|tsx)?$/,
+        use: {
+          loader: 'ts-loader',
+          options: {
+            appendTsSuffixTo: [/\.vue$/],
+          }
+        },
+        exclude: /node_modules/,
       },
       {
         test: /\.(css|less|sass)$/,
