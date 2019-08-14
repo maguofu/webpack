@@ -6,11 +6,16 @@
 </template>
 <script lang="ts">
   import { Vue, Component } from "vue-property-decorator";
-  export default class Demo extends Vue {
+  @Component({
+    components: {
+    }
+  })
 
+  export default class Demo extends Vue {
+    created() {
+    }
     gotoResult() {
-      // this.$router.push({name: 'result', params: {}});
-      console.log('asdfsdfg');
+      (this as any).$router.push({name: 'result', params: {}});
     }
   }
 </script>

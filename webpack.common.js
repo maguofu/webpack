@@ -60,7 +60,7 @@ module.exports = {
   plugins: [
     // 分离css
     new miniCssExtractPlugin({
-      filename: '[name].[hash:8].css',
+      filename: 'static/css/[name].[hash:8].css',
     }),
     new VueLoaderPlugin(),
   ].concat(getHtmls()),
@@ -98,6 +98,7 @@ module.exports = {
         use: [
           'vue-style-loader',
           'style-loader',
+          miniCssExtractPlugin.loader,
           'css-loader',
           'less-loader',
           'sass-loader',

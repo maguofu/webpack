@@ -13,7 +13,7 @@ export default {
   },
   mounted() {
     document.title = 'webpack+vue+ts'
-  },
+  }
 }
 </script>
 <style lang="less">

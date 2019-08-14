@@ -1,10 +1,24 @@
 <template>
   <div class="result-conponent">
     tttttrrrr
-    <div class="goto-index-btn">跳转到index页面</div>
+    <div class="goto-index-btn" @click="gotoIndex">跳转到index页面</div>
   </div>
 </template>
+<script lang="ts">
+  import { Vue, Component } from "vue-property-decorator";
+  @Component({
+    components: {
+    }
+  })
 
+  export default class Demo extends Vue {
+    created() {
+    }
+    gotoIndex() {
+      (this as any).$router.push({name: 'index', params: {}});
+    }
+  }
+</script>
 <style lang="less" scoped>
   .goto-index-btn{
     font-size: .2rem;

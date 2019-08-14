@@ -2,9 +2,13 @@
   "compilerOptions": {
     "outDir": "./dist/",
     "noImplicitAny": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "moduleResolution": "node",
     "module": "es6",
     "target": "es5",
-    "jsx": "react",
+    "jsx": "preserve",
     "allowJs": true,
     "sourceMap": true
   },
