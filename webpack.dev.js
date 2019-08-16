@@ -10,6 +10,11 @@ const proxy = {
       '^/api': ''
     }
   },
+  // 起一个本地服务且有study目录
+  '/study/*': {
+    target: 'http://localhost:70',
+    changeOrigin: true, // 改变源
+  }
 };
 
 module.exports = merge(common, {
