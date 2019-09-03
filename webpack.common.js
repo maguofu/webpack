@@ -45,18 +45,6 @@ module.exports = {
     },
     extensions: ['.vue', '.tsx', '.ts', '.js']
   },
-  // 防止重复，提出公共模块
-  // optimization: {
-  //   splitChunks: {
-  //     cacheGroups: {
-  //       commons: {
-  //         name: 'commons',
-  //         chunks: "initial",
-  //         minChunks: 2
-  //       }
-  //     }
-  //   }
-  // },
   plugins: [
     // 分离css
     new miniCssExtractPlugin({

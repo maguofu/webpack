@@ -11,8 +11,14 @@ const proxy = {
     }
   },
   // 起一个本地服务且有study目录
+  // '/study/*': {
+  //   target: 'http://localhost:70',
+  //   changeOrigin: true, // 改变源
+  // }
   '/study/*': {
-    target: 'http://localhost:70',
+    // target相当于baseUrl，访问完整路径：/webpack-learn/test/study/mock/mytest3，所以站点根目录下.htaccess配置如下
+    // RewriteRule ^webpack-learn/test/study/mock/mytest3$                  /webpack-learn/test/study/mock/mytest3.json
+    target: 'http://localhost:70/webpack-learn/test',
     changeOrigin: true, // 改变源
   }
 };

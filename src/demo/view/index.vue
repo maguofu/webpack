@@ -1,6 +1,6 @@
 <template>
   <div class="index-component">
-    ttttiiiii
+    <p>信息提交</p>
     <div class="goto-result-btn" @click="gotoResult">跳转到result页面</div>
   </div>
 </template>

@@ -7,7 +7,7 @@ const apiInfo = {
     method: 'get'
   },
   demoApi: {
-    url: `/study/mock/test`,
+    url: `/study/mock/test3`,
     method: 'get'
   }
 };
