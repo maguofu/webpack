@@ -6,16 +6,31 @@
 </template>
 <script lang="ts">
   import { Vue, Component } from "vue-property-decorator";
+  import { funDecorator, funDecoratorHigher } from "@src/demo/decorator/test";
   @Component({
     components: {
     }
   })
 
   export default class Demo extends Vue {
+    private context: any = null;
     created() {
+      this.testHander();
     }
+
     gotoIndex() {
-      (this as any).$router.push({name: 'index', params: {}});
+      console.log(this);
+      ((this as any).$router as any).push({name: 'index', params: {}});
+    }
+
+    @funDecoratorHigher(new Demo())
+    testHander() {
+      console.log('============');
+      this.myFun();
+    }
+
+    myFun() {
+      console.log('啊看见对方卡的是否卡');
     }
   }
 </script>

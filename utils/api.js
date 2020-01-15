@@ -6,14 +6,17 @@ const queryParams = query();
 const instance = axios.create();
 
 instance.interceptors.request.use(config => {
+  // console.log(`axios request interceptors:${JSON.stringify(config)}`);
   return config
 }, error => {
   return Promise.reject()
 })
 
 instance.interceptors.response.use(res => {
+  // console.log(`axios response interceptors:${JSON.stringify(res)}`);
   return res.data;
 }, error => {
+  // console.log(error.response);
   Promise.reject(error)
 })
 

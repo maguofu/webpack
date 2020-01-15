@@ -30,3 +30,31 @@ new Vue({
   router,
   render: (h: any):any => h(App)
 }).$mount("#app")
+
+
+import { 
+  classDecorator,
+  classDecoratorHigher,
+  classPropDecorator,
+  classPropDecoratorHigher,
+  paramsDecorator
+ } from "@src/demo/decorator/test";
+
+
+@classDecoratorHigher('1111', '2222')
+class Person {
+  name: string;
+  constructor(name: string) {
+    this.name = name || 'jane';
+  }
+  @classPropDecoratorHigher({a: 111})
+  log(@paramsDecorator arg1:any, arg2:any) {
+    console.log(`Arguments Recevied are ${arg1} ${arg2}`);
+    return `${arg1} ${arg2}`;
+  }
+}
+
+let p1 = new Person('王二');
+console.log(p1);
+(p1 as any).echoName();
+p1.log('aaa', 'bbb');
