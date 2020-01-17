@@ -6,7 +6,7 @@
 </template>
 <script lang="ts">
   import { Vue, Component } from "vue-property-decorator";
-  import { funDecorator, funDecoratorHigher } from "@src/demo/decorator/test";
+  import { funDecorator, funDecoratorHigher } from "@src/common/decorator/test";
   @Component({
     components: {
     }

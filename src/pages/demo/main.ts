@@ -38,7 +38,7 @@ import {
   classPropDecorator,
   classPropDecoratorHigher,
   paramsDecorator
- } from "@src/demo/decorator/test";
+ } from "@src/common/decorator/test";
 
 
 @classDecoratorHigher('1111', '2222')

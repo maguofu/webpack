@@ -3,7 +3,29 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const miniCssExtractPlugin = require('mini-css-extract-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const pages = require('./page');
+const glob = require("glob");
+
+function entries() {
+  let entryObj = {
+    pageList: []
+  };
+  // 读取/src/pages/*/*.{js,ts}  即入口文件路径
+  const PAGE_PATH = path.resolve(__dirname, './src/pages');
+  const entryFiles = glob.sync(PAGE_PATH + '/*/*.{js,ts}', {
+    ignore: PAGE_PATH + '/*/*.d.ts'
+  })
+  
+  entryFiles.forEach((filePath) => {
+    let name = filePath.split('/')[filePath.split('/').length - 2];
+    entryObj.pageList.push({
+      entry: `./${filePath.slice(filePath.indexOf('src'))}`,
+      name: name,
+    })
+    console.log(`>>>>page is /${name}.html#/`)
+  })
+  return entryObj;
+}
+const pages = entries();
 // S获取入口map
 let entryMap = {};
 pages.pageList.map((item) => {

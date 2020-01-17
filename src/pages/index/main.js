@@ -2,7 +2,7 @@ import './css/style.less';
 import './css/index.css';
 import timu from './resource/timu.png';
 import data from './resource/data.xml';
-import { printMe } from '../common/print';
+import { printMe } from '@src/common/print';
 
 if (process.env.NODE_ENV === 'production') {
   console.log('Looks like we are in production mode!');
@@ -28,7 +28,7 @@ function component() {
 document.body.appendChild(component());
 
 if (module.hot) {
-  module.hot.accept('../common/print.js', () => {
+  module.hot.accept('@src/common/print.js', () => {
     console.log('Accepting the updated printMe module!');
     printMe();
   })
