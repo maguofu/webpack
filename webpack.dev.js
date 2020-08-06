@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 const common = require('./webpack.common.js');
+const smp = new SpeedMeasurePlugin();
 const proxy = {
   '/test/*': {
     target: 'http://yapi.afpai.com/mock/768', // 源地址
@@ -23,7 +25,8 @@ const proxy = {
   }
 };
 
-module.exports = merge(common, {
+module.exports = smp.wrap(merge(common, {
+  mode: 'development',
   output: {
     // S使用 webpack-dev-middleware   开发模式   server.js和node server.js
     publicPath: '/',
@@ -43,4 +46,4 @@ module.exports = merge(common, {
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
   ]
-})
+}));

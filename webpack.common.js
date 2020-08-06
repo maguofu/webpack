@@ -2,8 +2,13 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const miniCssExtractPlugin = require('mini-css-extract-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// VueLoaderPlugin配合vue-loader@15*版本使用
+// const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const glob = require("glob");
+// happy使用时  vue-loader@15*版本报错  降级14x版本  不需要vue-loader的VueLoaderPlugin配合使用
+const HappyPack = require('happypack');
+const happyThreadPool = HappyPack.ThreadPool({ size: 4 });
 
 function entries() {
   let entryObj = {
@@ -52,7 +57,7 @@ function getHtmls() {
 }
 // E输出HTML文件  // 生成build的HTML文件
 
-module.exports = {
+const baseConfig = {
   entry: {
     ...entryMap
   },
@@ -72,24 +77,67 @@ module.exports = {
     new miniCssExtractPlugin({
       filename: 'static/css/[name].[hash:8].css',
     }),
-    new VueLoaderPlugin(),
+    // new VueLoaderPlugin(),
+    new HappyPack({
+      id: 'jsx',
+      threadPool: happyThreadPool,
+      loaders: [ 'babel-loader' ]
+    }),
+    new HappyPack({
+      id: 'vue',
+      threadPool: happyThreadPool,
+      loaders: [ 
+        {
+          loader: 'vue-loader',
+          options: {
+            loaders: {
+              css: ExtractTextPlugin.extract({
+                use: [
+                  {
+                    loader: 'happypack/loader?id=css',
+                  },
+                ],
+                fallback: 'vue-style-loader'
+              }),
+              less: ExtractTextPlugin.extract({
+                use: [
+                  'happypack/loader?id=css',
+                  'happypack/loader?id=less',
+                ],
+                fallback: 'vue-style-loader'
+              }),
+              js: 'happypack/loader?id=jsx'
+            },
+         }
+        }
+       ]
+    }),
+    new HappyPack({
+      id: 'styles',
+      threadPool: happyThreadPool,
+      loaders: [ 'style-loader', 'css-loader', 'less-loader' ]
+    }),
   ].concat(getHtmls()),
   module: {
     rules: [
       {
-        test: /\.(js|ts)$/,
-        use: [{
-          loader: 'babel-loader',
-          options: {
-             presets: ['es2015']
-          }
-        }]
+        test: /\.(js|ts|tsx)$/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['es2015']
+            }
+          },
+          'happypack/loader?id=jsx',
+        ]
       },
       {
         test: /\.vue$/,
         exclude: /node_modules/,
         use: [
           'vue-loader',
+          'happypack/loader?id=vue',
         ]
       },
       {
@@ -101,6 +149,11 @@ module.exports = {
           }
         },
         exclude: /node_modules/,
+      },
+      {
+        test: /\.less$/,
+        exclude: /node_modules/,
+        use: 'happypack/loader?id=styles'
       },
       {
         test: /\.(css|less|sass)$/,
@@ -144,3 +197,5 @@ module.exports = {
     ]
   }
 };
+
+module.exports = baseConfig;
