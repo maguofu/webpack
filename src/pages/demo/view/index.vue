@@ -1,29 +1,30 @@
 <template>
   <div class="index-component">
     <p>信息提交</p>
+    <div class="bg"></div>
     <div class="goto-result-btn" @click="gotoResult">跳转到result页面</div>
   </div>
 </template>
 <script lang="ts">
-  import { Vue, Component } from "vue-property-decorator";
-  import $http from '@src/api/api.js';
+import { Vue, Component } from 'vue-property-decorator';
+import $http from '@src/api/api.js';
   @Component({
     components: {
     }
   })
 
-  export default class Demo extends Vue {
-    created() {
-      ($http as any).demoApi({a: 'asdfasdf'}).then((res:any) => {
-        console.log(res);
-      }).catch((e:any) => {
+export default class Demo extends Vue {
+  created() {
+    ($http as any).demoApi({a: 'asdfasdf'}).then((res:any) => {
+      console.log(res);
+    }).catch(() => {
 
-      })
-    }
-    gotoResult() {
-      (this as any).$router.push({name: 'result', params: {}});
-    }
+    });
   }
+  gotoResult() {
+    (this as any).$router.push({name: 'result', params: {}});
+  }
+}
 </script>
 <style lang="less" scoped>
   .goto-result-btn{
@@ -38,6 +39,12 @@
     left: 50%;
     margin-left: -2rem;
     background: #ccc;
+  }
+  .bg{
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    background: url('../../index/resource/course-type.png');
   }
 </style>
 

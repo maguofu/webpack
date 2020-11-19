@@ -9,14 +9,14 @@ export default {
   data() {
     return {
       
-    }
+    };
   },
   methods: {
     gotoIndex() {
-      this.$router.push({name: 'index', params: {}})
+      this.$router.push({name: 'index', params: {}});
     }
   },
-}
+};
 </script>
 <style lang="less" scoped>
   .goto-index-btn{

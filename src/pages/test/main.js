@@ -24,8 +24,9 @@ import router from './router/index.js';
 import App from './test.vue';
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false;
+// eslint-disable-next-line no-undef
 Vue.config.devtools = process.env.NODE_ENV !== 'production';
 new Vue({
   router,
   render: h => h(App)
-}).$mount("#app")
+}).$mount('#app');

@@ -8,25 +8,25 @@ export interface extra {
 // Start函数装饰器
 // MethodDecorator = <T>(target: Object, key: string, descriptor: TypedPropertyDescriptor<T>) => TypedPropertyDescriptor<T> | Void;
 export function funDecorator(target: Object, key: string, descriptor:any){
-  let oldValue = descriptor.value;
+  const oldValue = descriptor.value;
   // do something
   descriptor.value = function() {
     // do something
     oldValue.apply(target);
-  }
+  };
   return descriptor;
 }
 
-export function funDecoratorHigher(context?: any){
+export function funDecoratorHigher(){
   return function(target: Object, key: string, descriptor:any){
-    let oldValue = descriptor.value;
+    const oldValue = descriptor.value;
     // do something
     descriptor.value = function() {
       // do something
       oldValue.apply(target);
-    }
+    };
     return descriptor;
-  }
+  };
 }
 // End函数装饰器
 
@@ -40,7 +40,7 @@ export function classDecorator<T extends { new (...args: any[]): {} }> (construc
     echoName: Function = function() {
       console.log(this.name);
     }
-  }
+  };
 }
 
 export function classDecoratorHigher(name:string, extra:string){
@@ -51,8 +51,8 @@ export function classDecoratorHigher(name:string, extra:string){
       echoName: Function = function() {
         console.log(this.name);
       }
-    }
-  }
+    };
+  };
 }
 // End装饰类
 
@@ -60,23 +60,23 @@ export function classDecoratorHigher(name:string, extra:string){
 
 // Start装饰类的属性、方法
 export function classPropDecorator(target:any, propertyKey: string, descriptor: PropertyDescriptor): any {
-  let oldVal = descriptor.value;
+  const oldVal = descriptor.value;
   descriptor.value = function() {
     oldVal.apply(target);
-  }
+  };
   return descriptor;
 }
 
-export function classPropDecoratorHigher(args: any){
+export function classPropDecoratorHigher(){
   return function(target:any, propertyKey: string, descriptor: PropertyDescriptor): any{
-    let oldVal = descriptor.value;
+    const oldVal = descriptor.value;
     descriptor.value = function() {
       // do something
       // console.log(args);
       oldVal.apply(target);
-    }
+    };
     return descriptor;
-  }
+  };
 }
 // End装饰类的属性、方法
 

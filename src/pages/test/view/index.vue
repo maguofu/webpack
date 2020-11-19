@@ -10,19 +10,19 @@ export default {
   data() {
     return {
       
-    }
+    };
   },
   created() {
-    api.testApi({a: 'aaa'}).then(res => {
+    api.testApi({a: 'aaa'}).then(() => {
       
-    })
+    });
   },
   methods: {
     gotoResult() {
       this.$router.push({name: 'result', params: {}});
     }
   },
-}
+};
 </script>
 <style lang="less" scoped>
   .index-conponent{

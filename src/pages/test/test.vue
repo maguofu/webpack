@@ -9,12 +9,12 @@ export default {
   data() {
     return {
       
-    }
+    };
   },
   mounted() {
-    document.title = 'webpack+vue'
+    document.title = 'webpack+vue';
   },
-}
+};
 </script>
 <style lang="less">
   html,body,#app{
