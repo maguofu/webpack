@@ -23,6 +23,7 @@ function entries() {
     })
     console.log(`>>>>page is /${name}.html#/`)
   })
+  console.log(entryObj)
   return entryObj;
 }
 const pages = entries();
@@ -35,7 +36,7 @@ pages.pageList.map((item) => {
   return
 });
 // E获取入口map
-
+console.log(entryMap);
 // S输出HTML文件  // 生成build的HTML文件
 function getHtmls() {
   return pages.pageList.reduce((pre, cur)=>{
@@ -43,21 +44,22 @@ function getHtmls() {
       new HtmlWebpackPlugin({
         template: './publish/template.html',
         filename: `${cur.name}.html`,
-        // chunks: [`${cur.name}`, 'commons']
-        chunks: [`${cur.name}`]
+        chunks: [
+          `${cur.name}`,
+          'vendors',
+        ]
       })
     ]
     return pre.concat(tempArr);
   }, [])
 }
 // E输出HTML文件  // 生成build的HTML文件
-
 module.exports = {
   entry: {
     ...entryMap
   },
   output: {
-    filename: 'static/js/[name].[hash:8].js',
+    filename: 'static/js/[name].[contenthash:8].js',
     path: path.resolve(__dirname, 'dist'),
   },
   resolve:{
@@ -67,10 +69,29 @@ module.exports = {
     },
     extensions: ['.vue', '.tsx', '.ts', '.js']
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      maxInitialRequests: Infinity,
+      minSize: 0,
+      cacheGroups: {
+        vendors: {  // 抽离第三方插件
+            test: /[\\/]node_modules[\\/]/,     // 指定是node_modules下的第三方包
+            name: "vendors",
+            priority: -10                       // 抽取优先级
+        },
+        default: {
+          minChunks: Infinity,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      },
+    },
+  },
   plugins: [
     // 分离css
     new miniCssExtractPlugin({
-      filename: 'static/css/[name].[hash:8].css',
+      filename: 'static/css/[name].[contenthash:8].css',
     }),
     new VueLoaderPlugin(),
   ].concat(getHtmls()),
@@ -119,7 +140,7 @@ module.exports = {
         use: {
           loader: 'file-loader',
           options: {
-            name: './static/images/[name].[hash:8].[ext]',
+            name: './static/images/[name].[contenthash:8].[ext]',
           }
         }
       },

@@ -7,6 +7,7 @@ const optimizeCss = require('optimize-css-assets-webpack-plugin');
 const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
+  mode: 'production',
   plugins: [
     // 删除build之后的文件夹内容
     new CleanWebpackPlugin(),

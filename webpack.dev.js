@@ -24,6 +24,7 @@ const proxy = {
 };
 
 module.exports = merge(common, {
+  mode: 'development',
   output: {
     // S使用 webpack-dev-middleware   开发模式   server.js和node server.js
     publicPath: '/',
@@ -35,12 +36,12 @@ module.exports = merge(common, {
   // S使用 webpack-dev-server  开发模式（常用方式）  webpack-dev-server --open
   devServer: {
     contentBase: './src',
-    hot: true,
+    // hot: true,//使用contenthash之后需要关闭热更新，否则编译报错
     proxy: proxy
   },
   // E使用 webpack-dev-server  开发模式（常用方式）  webpack-dev-server --open
   plugins: [
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.HotModuleReplacementPlugin(), //使用contenthash之后需要关闭热更新，否则编译报错
   ]
 })
